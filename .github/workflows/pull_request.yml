@@ -1,0 +1,63 @@
+name: Build and Deploy to Github Pages
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    branches: ["main"]
+
+jobs:
+  build:
+    env:
+      DEEPSOURCE_DSN: ${{ secrets.DEEPSOURCE_DSN }}
+    permissions:
+      pull-requests: write
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - uses: pnpm/action-setup@v2
+        name: Install pnpm
+        with:
+          version: 8
+          run_install: false
+
+      - name: Install node dependencies
+        run: pnpm install
+
+      - name: Run unit tests and coverage
+        run: pnpm test -- --coverage --watchAll=false
+
+      # - name: Report test-coverage to DeepSource
+      #   run: |
+      #     # Install the CLI
+      #     curl https://deepsource.io/cli | sh
+
+      #     # Send the report to DeepSource
+      #     ./bin/deepsource report --analyzer test-coverage --key javascript --value-file ./coverage/lcov.info
+
+      # - name: SonarCloud Scan
+      #   uses: SonarSource/sonarcloud-github-action@master
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Needed to get PR information, if any
+      #     SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      #   with:
+      #     args: >
+      #       -Dsonar.host.url=https://sonarcloud.io
+      #       -Dsonar.organization=jeremyjousse
+      #       -Dsonar.projectKey=jeremyjousse_website
+      #       -Dsonar.sources=src
+      #       -Dsonar.sources.exclusions="**/*.test.ts",
+      #       -Dsonar.tests=playwright,vitest
+      #       -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info
+      #       -Dsonar.pullrequest.branch=${{github.event.pull_request.head.ref}}
+      #       -Dsonar.pullrequest.key=${{github.event.pull_request.number}}
+      #       -Dsonar.scm.revision=${{github.event.pull_request.head.ref}}
