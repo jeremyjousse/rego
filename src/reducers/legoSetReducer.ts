@@ -33,22 +33,26 @@ export type LegoPartsActon = LegoPartsDecrementActon | LegoPartsIncrementActon;
 const legoPartsActionMap = new Map([
   [
     LegoPartsActonTypes.DECREMENT,
-    (state: LegoParts, payload: LegoPartsActionPayload) => ({
-      ...state,
-      [payload.name]:
-        state[payload.name] === undefined || state[payload.name] < 1
-          ? 0
-          : state[payload.name]--,
-    }),
+    (state: LegoParts, payload: LegoPartsActionPayload) => {
+      return {
+        ...state,
+        [payload.name]:
+          state[payload.name] === undefined || state[payload.name] < 1
+            ? 0
+            : --state[payload.name],
+      };
+    },
   ],
 
   [
     LegoPartsActonTypes.INCREMENT,
-    (state: LegoParts, payload: LegoPartsActionPayload) => ({
-      ...state,
-      [payload.name]:
-        state[payload.name] === undefined ? 1 : state[payload.name]++,
-    }),
+    (state: LegoParts, payload: LegoPartsActionPayload) => {
+      return {
+        ...state,
+        [payload.name]:
+          state[payload.name] === undefined ? 1 : ++state[payload.name],
+      };
+    },
   ],
 ]);
 

@@ -34,7 +34,7 @@ jobs:
         run: pnpm install
 
       - name: Run unit tests and coverage
-        run: pnpm test -- --coverage --watchAll=false
+        run: pnpm test:coverage
 
       # - name: Report test-coverage to DeepSource
       #   run: |
