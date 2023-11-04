@@ -61,7 +61,7 @@ jobs:
           run_install: false
 
       - name: Run unit tests and coverage
-        run: pnpm test -- --coverage --watchAll=false
+        run: pnpm test:coverage
 
       # - name: SonarCloud Scan
       #   uses: SonarSource/sonarcloud-github-action@master
