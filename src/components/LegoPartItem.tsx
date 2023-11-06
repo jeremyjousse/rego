@@ -5,6 +5,7 @@ import {
 
 type LegoPartItemProps = {
   readonly color: string;
+  readonly hideFound: boolean;
   readonly id: string;
   readonly imgUrl: string;
   readonly name: string;
@@ -15,6 +16,7 @@ type LegoPartItemProps = {
 
 const LegoPartItem = ({
   color,
+  hideFound,
   id,
   imgUrl,
   name,
@@ -45,42 +47,46 @@ const LegoPartItem = ({
   };
 
   return (
-    <div
-      className={`text-center mb-6 p-5 rounded-2xl border-2 ${
-        quantity > quantityFound ? "bg-red-300" : "bg-green-200"
-      }`}
-      key={id}
-    >
-      <img src={imgUrl} width="100" alt={name} className="mx-auto" />
-      <h2 className="text-xl mb-3">
-        ({color}) {name}
-      </h2>
-      <div className="grid grid-cols-3 gap-4 w-40 m-auto">
-        <div>
-          {quantityFound > 0 && (
-            <button
-              className="text-center bg-red-500 hover:bg-red-700 py-1 px-2 rounded"
-              onClick={decrease}
-            >
-              -
-            </button>
-          )}
+    <>
+      {((hideFound && quantity > quantityFound) || !hideFound) && (
+        <div
+          className={`text-center mb-6 p-5 rounded-2xl border-2 ${
+            quantity > quantityFound ? "bg-red-300" : "bg-green-200"
+          }`}
+          key={id}
+        >
+          <img src={imgUrl} width="100" alt={name} className="mx-auto" />
+          <h2 className="text-xl mb-3">
+            ({color}) {name}
+          </h2>
+          <div className="grid grid-cols-3 gap-4 w-40 m-auto">
+            <div>
+              {quantityFound > 0 && (
+                <button
+                  className="text-center bg-red-500 hover:bg-red-700 py-1 px-2 rounded"
+                  onClick={decrease}
+                >
+                  -
+                </button>
+              )}
+            </div>
+            <div>
+              {quantityFound}/{quantity}
+            </div>
+            <div>
+              {quantityFound < quantity && (
+                <button
+                  className="text-center bg-blue-500 hover:bg-blue-700 py-1 px-2 rounded"
+                  onClick={increase}
+                >
+                  +
+                </button>
+              )}
+            </div>
+          </div>
         </div>
-        <div>
-          {quantityFound}/{quantity}
-        </div>
-        <div>
-          {quantityFound < quantity && (
-            <button
-              className="text-center bg-blue-500 hover:bg-blue-700 py-1 px-2 rounded"
-              onClick={increase}
-            >
-              +
-            </button>
-          )}
-        </div>
-      </div>
-    </div>
+      )}
+    </>
   );
 };
 

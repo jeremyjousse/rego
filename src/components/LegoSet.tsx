@@ -7,6 +7,8 @@ import {
   useState,
 } from "react";
 
+import CloseIcon from "./icons/CloseIcon";
+import FilterIcon from "./icons/FilterIcon";
 import LegoPartItem from "./LegoPartItem";
 import { LegoPartType } from "../domain/LegoPartType";
 import { RebrickableAuthContext } from "../context/RebrickableAuthContext";
@@ -28,6 +30,7 @@ const loadLegoPartsFoundState = (setNum: string) => {
 
 const LegoSet = ({ setNum, setLegoSet }: Props) => {
   const [legoParts, setLegoParts] = useState([] as LegoPartType[]);
+  const [hideFound, setHideFound] = useState(false);
   const { rebrickableAuth } = useContext(RebrickableAuthContext);
 
   const [legoPartsFound, dispatchFound] = useReducer(
@@ -54,9 +57,20 @@ const LegoSet = ({ setNum, setLegoSet }: Props) => {
   }, [legoPartsFound, setNum]);
   return (
     <div className="text-center">
-      <h1 className="text-2xl">Lego set parts</h1>
-      <div className="text-right">
-        <button onClick={() => setLegoSet("")}>Close</button>
+      <div className="grid grid-cols-3">
+        <div className="text-left">
+          <button onClick={() => setLegoSet("")}>
+            <CloseIcon />
+          </button>
+        </div>
+        <div className="text-center">
+          <h1 className="text-2xl">Lego set parts</h1>
+        </div>
+        <div className="text-right">
+          <button onClick={() => setHideFound(!hideFound)}>
+            <FilterIcon /> {hideFound}
+          </button>
+        </div>
       </div>
       {legoParts.map(({ id, color, name, imgUrl, quantity }) => {
         return (
@@ -69,6 +83,7 @@ const LegoSet = ({ setNum, setLegoSet }: Props) => {
             quantity={quantity}
             quantityFound={legoPartsFound[id] ?? 0}
             dispatchFound={dispatchFound}
+            hideFound={hideFound}
           />
         );
       })}

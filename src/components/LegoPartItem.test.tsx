@@ -11,6 +11,7 @@ describe("LegoPartItem", () => {
     render(
       <LegoPartItem
         color="red"
+        hideFound={false}
         id="12343-5"
         imgUrl="http://test.com/img.jpg"
         name="my brick"
