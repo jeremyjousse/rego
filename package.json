@@ -1,9 +1,12 @@
 {
-  "name": "rego-vite",
+  "name": "rego",
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://jeremyjousse.github.io/rego",
+  "homepage": "https://rego.jousse.fr/",
+  "repository": {
+    "url": "github:jeremyjousse/rego"
+  },
   "scripts": {
     "build": "tsc && vite build",
     "dev": "vite",
