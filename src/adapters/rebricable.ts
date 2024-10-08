@@ -39,7 +39,7 @@ export const getSet = async (
   setNum: string
 ): Promise<Either<GetSetError, LegoPartType[]>> => {
   const fetchResult = await fetch(
-    `https://rebrickable.com/api/v3/lego/sets/${setNum}/parts/?inc_minifig_parts=1`,
+    `https://rebrickable.com/api/v3/lego/sets/${setNum}/parts/?inc_minifig_parts=1&page_size=1000`,
     {
       method: "GET",
       headers: {
