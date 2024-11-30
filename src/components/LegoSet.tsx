@@ -64,7 +64,7 @@ const LegoSet = ({ setNum, setLegoSet }: Props) => {
           </button>
         </div>
         <div className="text-center">
-          <h1 className="text-2xl">Lego set parts</h1>
+          <h1 className="text-2xl">Lego set parts ({setNum})</h1>
         </div>
         <div className="text-right">
           <button onClick={() => setHideFound(!hideFound)}>
