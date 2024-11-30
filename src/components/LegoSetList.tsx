@@ -43,7 +43,7 @@ function LegoSetList({ setLegoSet }: Props) {
               <h2>
                 <img src={imgUrl} width="100" alt={name} className="mx-auto" />
                 <br />
-                {name}
+                {name} ({num})
               </h2>
             </button>
             <hr />
