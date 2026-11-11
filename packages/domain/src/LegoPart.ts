@@ -4,4 +4,5 @@ export interface LegoPart {
   readonly name: string;
   readonly imgUrl: string;
   readonly quantity: number;
+  readonly category: string;
 }

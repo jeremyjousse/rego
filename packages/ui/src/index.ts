@@ -3,6 +3,7 @@ export { default as FilterToggle } from "./FilterToggle.svelte";
 export { default as Header } from "./Header.svelte";
 export { default as LegoPartCard } from "./LegoPartCard.svelte";
 export { default as LegoSetCard } from "./LegoSetCard.svelte";
+export { default as PartFilterControls } from "./PartFilterControls.svelte";
 export { default as ThemeToggle } from "./ThemeToggle.svelte";
 
 export { default as CheckIcon } from "./icons/CheckIcon.svelte";
