@@ -72,6 +72,13 @@
         >
           {part.color}
         </span>
+        {#if part.category}
+          <span
+            class="inline-block px-2 py-0.5 text-[11px] font-semibold rounded-lg bg-zinc-50 dark:bg-zinc-800/60 text-zinc-500 dark:text-zinc-400 border border-zinc-200/80 dark:border-zinc-700/80"
+          >
+            {part.category}
+          </span>
+        {/if}
       </div>
       <h4
         class="text-sm font-bold text-zinc-900 dark:text-zinc-100 leading-snug line-clamp-2"
