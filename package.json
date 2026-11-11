@@ -15,6 +15,7 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "test": "pnpm -r test",
+    "test:coverage": "pnpm -r test",
     "desktop:dev": "pnpm --filter @rego/desktop dev",
     "desktop:build": "pnpm --filter @rego/desktop build",
     "desktop:ios": "pnpm --filter @rego/desktop ios"
