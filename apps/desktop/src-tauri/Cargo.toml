@@ -1,0 +1,18 @@
+[package]
+name = "rego-desktop"
+version = "0.1.0"
+description = "A simple app to help re box your Lego sets"
+authors = ["Jeremy Jousse"]
+edition = "2021"
+
+[lib]
+name = "rego_desktop_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+tauri = { version = "2", features = [] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"

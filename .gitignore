@@ -15,6 +15,11 @@ build
 dist
 dist-ssr
 *.local
+.svelte-kit
+.worktrees
+target
+**/src-tauri/target
+**/src-tauri/gen
 
 # test
 coverage/*

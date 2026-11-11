@@ -1,0 +1,40 @@
+@import "tailwindcss";
+
+@source "../../../packages/ui";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-lego-red: #e3000b;
+  --color-lego-yellow: #ffd700;
+  --color-lego-blue: #0055bf;
+  --color-lego-green: #009639;
+  --color-lego-black: #1b1b1b;
+  --color-lego-orange: #fe8a18;
+}
+
+/* Wry / WebKit & Cross-Platform Render Fixes */
+*,
+::before,
+::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
+  font-size: 100%;
+}
+
+button {
+  -webkit-appearance: none;
+  appearance: none;
+}

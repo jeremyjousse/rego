@@ -1,0 +1,24 @@
+[tasks.check]
+description = "Typecheck domain and SvelteKit web application"
+run = "pnpm run check"
+
+[tasks."format:check"]
+description = "Check formatting with Prettier"
+run = "pnpm run format:check"
+
+[tasks.format]
+description = "Format code with Prettier"
+run = "pnpm run format"
+
+[tasks.test]
+description = "Run tests across all workspace packages"
+run = "pnpm run test"
+
+[tasks.build]
+description = "Build static web application for GitHub Pages"
+depends = ["check"]
+run = "pnpm run build"
+
+[tasks.verify]
+description = "Run all verification checks"
+depends = ["format:check", "test", "build"]
