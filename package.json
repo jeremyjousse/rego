@@ -21,8 +21,11 @@
     "desktop:ios": "pnpm --filter @rego/desktop ios"
   },
   "devDependencies": {
+    "@semantic-release/changelog": "^7.0.0",
+    "@semantic-release/git": "^11.0.1",
     "prettier": "^3.5.2",
     "prettier-plugin-svelte": "^3.3.3",
+    "semantic-release": "^25.0.9",
     "typescript": "^5.7.3"
   }
 }
