@@ -1,3 +1,10 @@
+## [1.0.4](https://github.com/jeremyjousse/rego/compare/v1.0.3...v1.0.4) (2026-11-13)
+
+
+### Bug Fixes
+
+* **ci:** map semantic-release step outputs to job outputs in release workflow ([13d9388](https://github.com/jeremyjousse/rego/commit/13d9388c46d697713ad89791b923a8ff3f16fd71))
+
 ## [1.0.3](https://github.com/jeremyjousse/rego/compare/v1.0.2...v1.0.3) (2026-11-13)
 
 
