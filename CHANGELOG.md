@@ -1,3 +1,10 @@
+## [1.0.2](https://github.com/jeremyjousse/rego/compare/v1.0.1...v1.0.2) (2026-11-13)
+
+
+### Bug Fixes
+
+* **desktop:** fix frontendDist relative path for Tauri web assets ([8494ccd](https://github.com/jeremyjousse/rego/commit/8494ccda4c28eb04e71212a5f0ab5ff21f1db793))
+
 ## [1.0.1](https://github.com/jeremyjousse/rego/compare/v1.0.0...v1.0.1) (2026-11-13)
 
 
