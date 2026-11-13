@@ -24,16 +24,16 @@ jobs:
       DEEPSOURCE_DSN: ${{ secrets.DEEPSOURCE_DSN }}
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v7
 
-      - uses: actions/configure-pages@v1
+      - uses: actions/configure-pages@v5
         id: pages
 
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v7
         with:
           node-version: 22
 
-      - uses: pnpm/action-setup@v2
+      - uses: pnpm/action-setup@v6
         name: Install pnpm
         with:
           version: 10
@@ -45,20 +45,9 @@ jobs:
 
       - name: Fix permissions
         run: |
-          chmod -c -R +rX "_site/" | while read line; do
+          chmod -c -R +rX "apps/web/build/" | while read -r line; do
           echo "::warning title=Invalid file permissions automatically fixed::$line"
           done
-
-      - uses: actions/setup-node@v3
-        name: Uses pnpm
-        with:
-          node-version: 22
-
-      - uses: pnpm/action-setup@v2
-        name: Uses pnpm
-        with:
-          version: 10
-          run_install: false
 
       - name: Run unit tests and coverage
         run: pnpm test:coverage
@@ -90,7 +79,7 @@ jobs:
       #     ./bin/deepsource report --analyzer test-coverage --key javascript --value-file ./coverage/lcov.info
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v2
+        uses: actions/upload-pages-artifact@v4
         with:
           path: ./apps/web/build
 
@@ -101,5 +90,5 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - uses: actions/deploy-pages@v1
+      - uses: actions/deploy-pages@v4
         id: deployment

@@ -1,9 +1,10 @@
 name: Release and Desktop Builds
 
 on:
-  push:
-    branches:
-      - main
+  workflow_run:
+    workflows: ["Build, test and Deploy to Github Pages"]
+    types: [completed]
+    branches: [main]
 
 permissions:
   contents: write
@@ -17,17 +18,19 @@ concurrency:
 jobs:
   release:
     name: Semantic Release
+    if: github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.event == 'push'
     runs-on: ubuntu-24.04
     timeout-minutes: 30
     outputs:
       new_release_published: ${{ steps.semantic.outputs.new_release_published }}
-      release_version: ${{ steps.semantic.outputs.release_version }}
-      release_tag: ${{ steps.semantic.outputs.release_tag }}
+      release_version: ${{ steps.semantic.outputs.new_release_version }}
+      release_tag: ${{ steps.semantic.outputs.new_release_git_tag }}
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v7
         with:
+          ref: ${{ github.event.workflow_run.head_sha }}
           fetch-depth: 0
           persist-credentials: true
 
@@ -45,7 +48,7 @@ jobs:
       - name: Get pnpm store directory
         shell: bash
         run: |
-          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+          echo "STORE_PATH=$(pnpm store path --silent)" >> "$GITHUB_ENV"
 
       - name: Setup pnpm cache
         uses: actions/cache@v6
@@ -69,26 +72,17 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   build-tauri:
-    name: Build Desktop Artifacts (${{ matrix.platform }})
+    name: Build macOS Desktop Artifacts
     needs: release
     if: needs.release.outputs.new_release_published == 'true'
-    strategy:
-      fail-fast: false
-      matrix:
-        include:
-          - platform: macos-latest
-            args: ""
-          - platform: ubuntu-22.04
-            args: ""
-          - platform: windows-latest
-            args: ""
-
-    runs-on: ${{ matrix.platform }}
+    runs-on: macos-latest
     timeout-minutes: 60
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v7
+        with:
+          ref: ${{ needs.release.outputs.release_tag }}
 
       - name: Setup Node.js
         uses: actions/setup-node@v7
@@ -104,7 +98,7 @@ jobs:
       - name: Get pnpm store directory
         shell: bash
         run: |
-          echo "STORE_PATH=$(pnpm store path --silent)" >> $GITHUB_ENV
+          echo "STORE_PATH=$(pnpm store path --silent)" >> "$GITHUB_ENV"
 
       - name: Setup pnpm cache
         uses: actions/cache@v6
@@ -125,12 +119,6 @@ jobs:
         with:
           workspaces: apps/desktop/src-tauri -> target
 
-      - name: Install Linux dependencies
-        if: matrix.platform == 'ubuntu-22.04'
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y libwebkit2gtk-4.1-dev libappindicator3-dev librsvg2-dev patchelf libsoup-3.0-dev libjavascriptcoregtk-4.1-dev
-
       - name: Build web application
         run: pnpm run build
 
@@ -143,4 +131,3 @@ jobs:
           tagName: ${{ needs.release.outputs.release_tag }}
           releaseName: "Release ${{ needs.release.outputs.release_version }}"
           releaseBody: "See release notes in tag ${{ needs.release.outputs.release_tag }}"
-          args: ${{ matrix.args }}
