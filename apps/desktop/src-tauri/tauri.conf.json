@@ -7,7 +7,7 @@
     "beforeDevCommand": "pnpm --filter @rego/web dev",
     "devUrl": "http://localhost:5173",
     "beforeBuildCommand": "pnpm --filter @rego/web build",
-    "frontendDist": "../../apps/web/build"
+    "frontendDist": "../../web/build"
   },
   "app": {
     "windows": [
