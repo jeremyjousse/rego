@@ -21,8 +21,8 @@ jobs:
     timeout-minutes: 30
     outputs:
       new_release_published: ${{ steps.semantic.outputs.new_release_published }}
-      release_version: ${{ steps.semantic.outputs.release_version }}
-      release_tag: ${{ steps.semantic.outputs.release_tag }}
+      release_version: ${{ steps.semantic.outputs.new_release_version }}
+      release_tag: ${{ steps.semantic.outputs.new_release_git_tag }}
 
     steps:
       - name: Checkout repository
