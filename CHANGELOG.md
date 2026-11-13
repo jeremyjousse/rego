@@ -1,3 +1,10 @@
+## [1.0.3](https://github.com/jeremyjousse/rego/compare/v1.0.2...v1.0.3) (2026-11-13)
+
+
+### Bug Fixes
+
+* **ci:** gate releases and build macOS only ([f7bb618](https://github.com/jeremyjousse/rego/commit/f7bb618f6a0cff37d4dae6634d462d2c3461568d))
+
 ## [1.0.2](https://github.com/jeremyjousse/rego/compare/v1.0.1...v1.0.2) (2026-11-13)
 
 
