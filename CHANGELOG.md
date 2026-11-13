@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/jeremyjousse/rego/compare/v1.0.0...v1.0.1) (2026-11-13)
+
+
+### Bug Fixes
+
+* **ci:** fix release workflow step outputs and desktop build action ([b8c175a](https://github.com/jeremyjousse/rego/commit/b8c175a84f13ad14eba0d36663528837aaf2dddf))
+
 # 1.0.0 (2026-11-11)
 
 
