@@ -2,6 +2,18 @@
 description = "Typecheck domain and SvelteKit web application"
 run = "pnpm run check"
 
+[tasks."dev:web"]
+description = "Start webapp development server"
+run = "pnpm --filter @rego/web dev"
+
+[tasks."dev:desktop"]
+description = "Start Tauri desktop app in development mode"
+run = "pnpm --filter @rego/desktop tauri dev"
+
+[tasks."dev:ios"]
+description = "Start Tauri iOS app in development mode"
+run = "pnpm --filter @rego/desktop tauri ios dev"
+
 [tasks."format:check"]
 description = "Check formatting with Prettier"
 run = "pnpm run format:check"
